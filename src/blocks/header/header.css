@@ -1,0 +1,18 @@
+.header {
+  max-width: 882px;
+}
+
+.header::before {
+  content: '';
+  display: block;
+  border-bottom: 1px solid #545454;
+  opacity: 0.7;
+  position: relative;
+  top: 129px;
+}
+
+@media screen and (max-width: 350px) {
+  .header::before {
+    top: 89px;
+  }
+}
