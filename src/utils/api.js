@@ -80,6 +80,41 @@ class Api {
     })  
     .then(handleOriginalResponse)
   }
+
+  signUp(newUserData) {
+    return fetch(`${this._url}/signup`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        password: newUserData.password,
+        email: newUserData.email
+      })
+    })
+    .then(handleOriginalResponse)
+  }
+
+  singIn(UserData) {
+    return fetch(`${this._url}/signin`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        password: UserData.password,
+        email: UserData.email
+      })
+    })
+    .then(handleOriginalResponse)
+  }
+
+  checkToken(token) {
+    return fetch(`${this._url}/users/me`, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization" : `Bearer ${token}`
+      } 
+    })
+    .then(handleOriginalResponse)
+  }
 }
 
 const api = new Api ({
@@ -90,4 +125,11 @@ const api = new Api ({
   url: 'https://mesto.nomoreparties.co/v1/cohort-17'
 });
 
-export default api;
+const apiAuth = new Api({
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  url: 'https://auth.nomoreparties.co'
+})
+
+export {api, apiAuth};
