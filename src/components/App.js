@@ -179,7 +179,7 @@ function App() {
 
   React.useEffect(() => {
     if(localStorage.getItem('token')) {
-      let token = localStorage.getItem('token')
+      const token = localStorage.getItem('token')
       apiAuth.checkToken(token)
       .then((res) => {
         if(res) {
@@ -214,21 +214,11 @@ function App() {
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
         <Header email={email} link={headerLink} onClick={redirect} auth={loggedIn}/>
-        <InfoToolTip isOpen={isAcceptPopupOpen} onClose={closeAllPopups} isAccept={isAuthAccept}/>
         <Switch>
           <Route exact path="/">
             <ProtectedRoute component={Main} loggedIn={loggedIn} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} 
             onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick}
             cards={cards} onCardLike={handleCardLike} onCardDelete={handleCardDelete} />
-            <ProtectedRoute component={EditProfilePopup} loggedIn={loggedIn} isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} 
-            onUpdateUser={handleUpdateUser} onLoading={isloading} />
-            <ProtectedRoute component={EditAvatarPopup} loggedIn={loggedIn} isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} 
-            onUpdateAvatar={handleUpdateAvatar} onLoading={isloading} />
-            <ProtectedRoute component={AddPlacePopup} loggedIn={loggedIn} isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} 
-            onAddPlace={handleAddPlaceSubmit} onLoading={isloading} />
-            <ProtectedRoute component={DeletePlacePopup} loggedIn={loggedIn} isOpen={isDeletePlacePopupOpen} onClose={closeAllPopups} 
-            onDeletePlace={handlePlaceDeleteAccept} cardDelete={cardDelete} />
-            <ProtectedRoute component={ImagePopup} loggedIn={loggedIn} card={selectedCard} onClose={closeAllPopups} /> 
           </Route>
           <Route path="/sign-up">
             <Register onClick={redirect} onRegister={handleRegister}/>
@@ -241,6 +231,16 @@ function App() {
           </Route>
         </Switch>
         <Footer />
+        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} 
+        onUpdateUser={handleUpdateUser} onLoading={isloading} />
+        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} 
+        onUpdateAvatar={handleUpdateAvatar} onLoading={isloading} />
+        <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} 
+        onAddPlace={handleAddPlaceSubmit} onLoading={isloading} />
+        <DeletePlacePopup isOpen={isDeletePlacePopupOpen} onClose={closeAllPopups} 
+        onDeletePlace={handlePlaceDeleteAccept} cardDelete={cardDelete} />
+        <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+        <InfoToolTip isOpen={isAcceptPopupOpen} onClose={closeAllPopups} isAccept={isAuthAccept}/>
       </CurrentUserContext.Provider>
     </div>
   );

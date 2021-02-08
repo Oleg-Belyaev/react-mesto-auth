@@ -1,5 +1,4 @@
 import React from 'react';
-import editAvatarPath from '../images/edit-avatar.svg';
 import editButtonPath from '../images/edit-button.svg';
 import addButtonPath from '../images/add-button.svg';
 import Card from '../components/Card.js';
@@ -8,24 +7,13 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 function Main (props) {
   
   const currentUser = React.useContext(CurrentUserContext);
-  const [editAvatar, setEditAvatar] = React.useState(false);
-
-  function handleAvatarOver () {
-    setEditAvatar(true);
-  }
-
-  function handleAvatarOut () {
-    setEditAvatar(false);
-  }
+  const userAvatar = { backgroundImage: `url(${currentUser ? currentUser.avatar : ''})` };
 
   return (
     <main className="content page__section">
       <section className="profile content__section">
         <div className="profile__data">
-          <div className="profile__avatar" onClick={props.onEditAvatar} onMouseOver={handleAvatarOver} onMouseOut={handleAvatarOut}>
-            <img src={currentUser ? currentUser.avatar : null} alt="Фото" className="profile__foto" />
-            <img src={editAvatarPath} alt="Карандаш" className={`profile__avatar-edit ${editAvatar && 'profile__avatar-edit_active'}`} />
-          </div>
+          <div className="profile__avatar" style={userAvatar} onClick={props.onEditAvatar}></div>
           <div className="profile__info">
             <div className="profile__names">
               <h1 className="profile__name">{currentUser ? currentUser.name : null}</h1>

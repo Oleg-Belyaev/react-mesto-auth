@@ -13,9 +13,6 @@
 @import url(../src/blocks/content/__section/_has/content__section_has_indent.css);
 @import url(../src/blocks/profile/profile.css);
 @import url(../src/blocks/profile/__avatar/profile__avatar.css);
-@import url(../src/blocks/profile/__foto/profile__foto.css);
-@import url(../src/blocks/profile/__avatar-edit/profile__avatar-edit.css);
-@import url(../src/blocks/profile/__avatar-edit/_active/profile__avatar-edit_active.css);
 @import url(../src/blocks/profile/__data/profile__data.css);
 @import url(../src/blocks/profile/__info/profile__info.css);
 @import url(../src/blocks/profile/__names/profile__names.css);
